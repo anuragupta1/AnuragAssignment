@@ -1,43 +1,41 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {IProduct} from './product.model' ;
+import {ProductService } from './product.service' ;
+
 // declaration
 @Component({
        selector: 'app-prod',
        templateUrl: './product.component.html',
        styleUrls: ['./product.component.css']
 })
-export class ProductComponent {
+export class ProductComponent implements OnInit {
+       constructor(private _productService: ProductService) {
+       }
        title: String = '****Product Page ****';
-       info: String = 'No. of items Search';
+       info: String = 'No. of items Search on the basis of';
        showTable: Boolean = true ;
        showImage: Boolean = false;
-       userInput: String = 'Enter user text';
+       userInput: String = '';
        ImageWidth: Number = 50;
-       products: any[] =
-       [
-              {
-              '_id': '5a05dacc734d1d68d42d31f3',
-              'productId': 1,
-              'productName': 'Leaf Rake',
-              'productCode': 'GDN-0011',
-              'releaseDate': 'March 19, 2016',
-              'description': 'Leaf rake with 48-inch wooden handle.',
-              'price': 19.95,
-              'starRating': 3.5,
-              'imageUrl': 'http://openclipart.org/image/300px/svg_to_png/26215/Anonymous_Leaf_Rake.png'},
-              {'_id': '5a05daec734d1d68d42d32ca',
-              'productId': 2,
-              'productName': 'Garden Cart',
-              'productCode': 'GDN-0023',
-              'releaseDate': 'March 18, 2016',
-              'description': '15 gallon capacity rolling garden cart',
-              'price': 32.99,
-              'starRating': 4.2,
-              'imageUrl': 'http://openclipart.org/image/300px/svg_to_png/58471/garden_cart.png'
-              }
-       ];
+       products: IProduct[] =
+       [ ];
        toggleImg(): void {
               this.showImage = !this.showImage;
        }
+       OnDataRecieve(message: string): void   {
+              // console.log('On Data Recieve');
+           this.title = '~~~~~~ProductList~~~~~ is' + message;
+       }
+       // to consume the data we need hook
+       ngOnInit(): void {
+              // assigning to products of type IProduct[] this.ProductService.getProducts
+              this._productService.getProducts()
+                  .subscribe((data) => this.products = data) ;
+
+
+              }
+
+
 }
 
 
@@ -50,6 +48,6 @@ export class ProductComponent {
 
 
 
-       
+
 
 

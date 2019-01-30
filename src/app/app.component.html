@@ -1,6 +1,24 @@
+
+    <div>
+          <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <a class="navbar-brand" href="#">WebSiteName</a>
+              </div>
+              <ul class="nav navbar-nav">
+                <li class="active"><a [routerLink]="['/home']">HOME</a></li>
+                <li><a [routerLink]="['/products']">PRODUCT</a></li>
+                <li><a [routerLink]="['/orders']">ORDER</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+</div>
 <div>
-    <h1>This is coming in browser through home component</h1>
-    <app-prod></app-prod>
-    <app-detail></app-detail>
+    <router-outlet></router-outlet>
+    <!-- Container for routing scenarios in app.module.ts will appear here since we are sending the the data via app.module.ts
+    we are recieving it here in app.component.html-->
+    
 
 </div>
+    
