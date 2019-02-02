@@ -14,7 +14,15 @@ export class ProductDetailComponent implements OnInit {
     details: IProduct[];
 
     constructor(private _route: ActivatedRoute,
-        private _prodService: ProductService) {}
+        private _prodService: ProductService,
+        private _router: Router) {}
+
+        backProducts(): void {
+                this._router.navigate(['/products'] );
+
+        }
+
+
       ngOnInit(): void {
         this.id = this._route.snapshot.params['id'] ;
          this._prodService.getProductDetail(this.id)
