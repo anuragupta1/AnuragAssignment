@@ -6,11 +6,14 @@ import {MoviesService} from './movies.service' ;
 
  export class MoviesSideComponent implements OnInit {
      movies: any[];
-     constructor(private _movies: MoviesService) {}
+     id: string;
+        constructor(private _movies: MoviesService) {}
 
     ngOnInit(): void {
         this._movies.getMovies()
             .subscribe((data) => this.movies = data) ;
     }
-
- }
+    updateDetails(name: string): void {
+        this._movies.getMovieDetail(name)
+            .subscribe((data) => this.movies = data) ;
+    }}
